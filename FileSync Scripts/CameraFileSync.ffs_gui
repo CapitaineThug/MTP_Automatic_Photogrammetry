@@ -31,8 +31,8 @@
   </Filter>
   <FolderPairs>
     <Pair>
-      <Left>aasdasdfasdgdhsdf</Left>
-      <Right>hfgkfghk346er</Right>
+      <Left>C:\Users\Nicolas\Downloads\img</Left>
+      <Right>C:\Users\Nicolas\Downloads\img\IMG</Right>
     </Pair>
   </FolderPairs>
   <Errors Ignore="true" Retry="0" Delay="5" />

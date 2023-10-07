@@ -10,12 +10,12 @@ function GenerateForm {
 
 
     #Fonction pour synchroniser les images depuis la caméra en MTP
-    function SyncFiles{
+    function SyncFiles {
 
         #Variables
         $ConfigSync = ".\FileSync Scripts\CameraFileSync.ffs_gui"
         $CameraPath = $TB_ImagesPath.Text
-        $ProjectPath = $TB_ProjectPath.Text
+        $ProjectPath = $TB_ProjectPath.Text + "\IMG"
 
         #Modification du fichier de configuration ffs_gui
         $ConfigXml = [xml](Get-Content -Path $ConfigSync)
@@ -24,6 +24,15 @@ function GenerateForm {
         $PairElement.Right = $ProjectPath
         $ConfigXml.Save($ConfigSync)
 
+
+        #Synchronisation des fichiers avec le répertoire actuel
+        Start-Process -FilePath "FreeFileSync.exe" -ArgumentList "$PSScriptRoot\FileSync Scripts\CameraFileSync.ffs_gui\"
+
+    }
+
+    #Fonction pour lancer le calcul dans metashape
+    function LaunchProcess {
+        
     }
     
     #region Import the Assemblies
@@ -62,68 +71,68 @@ function GenerateForm {
     #Generated Event Script Blocks
     #----------------------------------------------
     #Provide Custom Code for events specified in PrimalForms.
-    $handler_L_ImagePath_Click= 
+    $handler_L_ImagePath_Click = 
     {
-    #TODO: Place custom script here
+        #TODO: Place custom script here
     
     }
     
-    $BT_LaunchSync_OnClick= 
+    $BT_LaunchSync_OnClick = 
     {
-    SyncFiles
+        SyncFiles
     
     }
     
-    $handler_L_ProjectPath_Click= 
+    $handler_L_ProjectPath_Click = 
     {
-    #TODO: Place custom script here
+        #TODO: Place custom script here
     
     }
     
-    $handler_TB_ImagesPath_TextChanged= 
+    $handler_TB_ImagesPath_TextChanged = 
     {
-    #TODO: Place custom script here
+        #TODO: Place custom script here
     
     }
     
-    $handler_GB_Files_Enter= 
+    $handler_GB_Files_Enter = 
     {
-    #TODO: Place custom script here
+        #TODO: Place custom script here
     
     }
     
-    $button2_OnClick= 
+    $button2_OnClick = 
     {
-    #TODO: Place custom script here
+        #TODO: Place custom script here
     
     }
     
-    $handler_label1_Click= 
+    $handler_label1_Click = 
     {
-    #TODO: Place custom script here
+        #TODO: Place custom script here
     
     }
     
-    $handler_tTB_Project_TextChanged= 
+    $handler_tTB_Project_TextChanged = 
     {
-    #TODO: Place custom script here
+        #TODO: Place custom script here
     
     }
     
-    $OnLoadForm_StateCorrection=
-    {#Correct the initial state of the form to prevent the .Net maximized form issue
+    $OnLoadForm_StateCorrection =
+    { #Correct the initial state of the form to prevent the .Net maximized form issue
         $F_Main.WindowState = $InitialFormWindowState
     }
     
     #----------------------------------------------
     #region Generated Form Code
-    $F_Main.BackColor = [System.Drawing.Color]::FromArgb(255,255,255,255)
+    $F_Main.BackColor = [System.Drawing.Color]::FromArgb(255, 255, 255, 255)
     $System_Drawing_Size = New-Object System.Drawing.Size
     $System_Drawing_Size.Height = 505
     $System_Drawing_Size.Width = 976
     $F_Main.ClientSize = $System_Drawing_Size
     $F_Main.DataBindings.DefaultDataSourceUpdateMode = 0
-    $F_Main.Font = New-Object System.Drawing.Font("Cascadia Mono",8.25,0,3,0)
+    $F_Main.Font = New-Object System.Drawing.Font("Cascadia Mono", 8.25, 0, 3, 0)
     $System_Drawing_Size = New-Object System.Drawing.Size
     $System_Drawing_Size.Height = 544
     $System_Drawing_Size.Width = 992
@@ -181,7 +190,7 @@ function GenerateForm {
     
     $GB_Lancement.Controls.Add($L_06)
     
-    $button2.BackColor = [System.Drawing.Color]::FromArgb(255,0,250,154)
+    $button2.BackColor = [System.Drawing.Color]::FromArgb(255, 0, 250, 154)
     
     $button2.DataBindings.DefaultDataSourceUpdateMode = 0
     
@@ -218,9 +227,9 @@ function GenerateForm {
     $GB_Sync.Text = "Synchronisation"
     
     $GB_Scan.Controls.Add($GB_Sync)
-    $label9.BackColor = [System.Drawing.Color]::FromArgb(255,255,99,71)
+    $label9.BackColor = [System.Drawing.Color]::FromArgb(255, 255, 99, 71)
     $label9.DataBindings.DefaultDataSourceUpdateMode = 0
-    $label9.Font = New-Object System.Drawing.Font("Courier New",14.25,1,3,0)
+    $label9.Font = New-Object System.Drawing.Font("Courier New", 14.25, 1, 3, 0)
     
     $System_Drawing_Point = New-Object System.Drawing.Point
     $System_Drawing_Point.X = 364
@@ -269,7 +278,7 @@ function GenerateForm {
     
     $GB_Sync.Controls.Add($L_05)
     
-    $BT_LaunchSync.BackColor = [System.Drawing.Color]::FromArgb(255,0,191,255)
+    $BT_LaunchSync.BackColor = [System.Drawing.Color]::FromArgb(255, 0, 191, 255)
     
     $BT_LaunchSync.DataBindings.DefaultDataSourceUpdateMode = 0
     
@@ -309,7 +318,7 @@ function GenerateForm {
     
     $F_Main.Controls.Add($GB_FileCopy)
     $textBox4.DataBindings.DefaultDataSourceUpdateMode = 0
-    $textBox4.ForeColor = [System.Drawing.Color]::FromArgb(255,0,128,0)
+    $textBox4.ForeColor = [System.Drawing.Color]::FromArgb(255, 0, 128, 0)
     $System_Drawing_Point = New-Object System.Drawing.Point
     $System_Drawing_Point.X = 239
     $System_Drawing_Point.Y = 26
@@ -408,7 +417,7 @@ function GenerateForm {
     
     $TB_ProjectPath.Anchor = 13
     $TB_ProjectPath.DataBindings.DefaultDataSourceUpdateMode = 0
-    $TB_ProjectPath.ForeColor = [System.Drawing.Color]::FromArgb(255,255,0,0)
+    $TB_ProjectPath.ForeColor = [System.Drawing.Color]::FromArgb(255, 255, 0, 0)
     $System_Drawing_Point = New-Object System.Drawing.Point
     $System_Drawing_Point.X = 207
     $System_Drawing_Point.Y = 74
@@ -443,7 +452,7 @@ function GenerateForm {
     
     $TB_ImagesPath.Anchor = 13
     $TB_ImagesPath.DataBindings.DefaultDataSourceUpdateMode = 0
-    $TB_ImagesPath.ForeColor = [System.Drawing.Color]::FromArgb(255,0,0,255)
+    $TB_ImagesPath.ForeColor = [System.Drawing.Color]::FromArgb(255, 0, 0, 255)
     $System_Drawing_Point = New-Object System.Drawing.Point
     $System_Drawing_Point.X = 207
     $System_Drawing_Point.Y = 35
@@ -478,10 +487,10 @@ function GenerateForm {
     
     
     $L_Title.Anchor = 13
-    $L_Title.BackColor = [System.Drawing.Color]::FromArgb(0,255,255,255)
+    $L_Title.BackColor = [System.Drawing.Color]::FromArgb(0, 255, 255, 255)
     $L_Title.DataBindings.DefaultDataSourceUpdateMode = 0
-    $L_Title.Font = New-Object System.Drawing.Font("Source Code Pro Black",26.2499981,1,3,0)
-    $L_Title.ForeColor = [System.Drawing.Color]::FromArgb(255,0,0,0)
+    $L_Title.Font = New-Object System.Drawing.Font("Source Code Pro Black", 26.2499981, 1, 3, 0)
+    $L_Title.ForeColor = [System.Drawing.Color]::FromArgb(255, 0, 0, 0)
     
     $System_Drawing_Point = New-Object System.Drawing.Point
     $System_Drawing_Point.X = 12
@@ -510,10 +519,10 @@ function GenerateForm {
     #Init the OnLoad event to correct the initial state of the form
     $F_Main.add_Load($OnLoadForm_StateCorrection)
     #Show the Form
-    $F_Main.ShowDialog()| Out-Null
+    $F_Main.ShowDialog() | Out-Null
     
-    } #End Function
+} #End Function
     
-    #Call the Function
-    GenerateForm
+#Call the Function
+GenerateForm
     
