@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FreeFileSync XmlType="GUI" XmlFormat="23">
+<FreeFileSync XmlType="BATCH" XmlFormat="23">
   <Notes />
   <Compare>
     <Variant>TimeAndSize</Variant>
@@ -31,8 +31,8 @@
   </Filter>
   <FolderPairs>
     <Pair>
-      <Left>C:\Users\Nicolas\Downloads\img</Left>
-      <Right>C:\Users\Nicolas\Downloads\img\IMG</Right>
+      <Left>C:\Users\Nicolas\Downloads\CameraFiles</Left>
+      <Right>C:\Users\Nicolas\Downloads\Project\IMG</Right>
     </Pair>
   </FolderPairs>
   <Errors Ignore="true" Retry="0" Delay="5" />
@@ -40,4 +40,9 @@
   <LogFolder />
   <EmailNotification Condition="Always" />
   <GridViewType>Action</GridViewType>
+  <Batch>
+    <ProgressDialog Minimized="true" AutoClose="true" />
+    <ErrorDialog>Show</ErrorDialog>
+    <PostSyncAction>None</PostSyncAction>
+  </Batch>
 </FreeFileSync>
