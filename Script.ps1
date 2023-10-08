@@ -10,7 +10,7 @@ function GenerateForm {
     function SyncFiles {
 
         #Variables
-        $ConfigSync = ".\FileSync Scripts\CameraFileSync.ffs_batch"
+        $ConfigSync = ".\FileSync_Scripts\CameraFileSync.ffs_batch"
         $CameraPath = $TB_ImagesPath.Text
         $AllProjectRoot = $TB_ProjectPath.Text
         $ProjectName = $TB_ProjectName.Text
@@ -43,7 +43,7 @@ function GenerateForm {
         #Synchronisation des fichiers avec le répertoire actuel
         $OldFiles = Get-ChildItem -Path $ProjectImagesPath
         StatusOn
-        Start-Process -FilePath '"FileSync Scripts\CameraFileSync.ffs_batch"'
+        Start-Process -FilePath '"FileSync_Scripts\CameraFileSync.ffs_batch"'
 
         #Délai demandé
         $TimeToWait = [int]::Parse($TB_WaitTime.text)
@@ -68,7 +68,7 @@ function GenerateForm {
     function LaunchProcess {
 
         #Lancement du script python pour Metashape
-        Start-Process -FilePath "Metashape.exe" -ArgumentList "-r", '"Metashape Scripts\CreateProjectFiles.py"', $ProjectImagesPath, $ProjectPath, $TB_ProjectName.text -Wait
+        Start-Process -FilePath "Metashape.exe" -ArgumentList "-r", '"Metashape_Scripts\CreateProjectFiles.py"', $ProjectImagesPath, $ProjectPath, $TB_ProjectName.text -Wait
 
         #Ouverture du projet
         $FullProjectPath = $ProjectPath + "\" + $TB_ProjectName.text + ".psx"

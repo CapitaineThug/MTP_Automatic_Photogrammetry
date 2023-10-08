@@ -32,7 +32,7 @@
   <FolderPairs>
     <Pair>
       <Left>mtp:\D40X\Removable storage\DCIM\100IIII6</Left>
-      <Right>C:\Users\Nicolas\Downloads\Project\CanonIxius\IMG</Right>
+      <Right>D:\Files\scan supreme\test01\IMG</Right>
     </Pair>
   </FolderPairs>
   <Errors Ignore="true" Retry="0" Delay="5" />
