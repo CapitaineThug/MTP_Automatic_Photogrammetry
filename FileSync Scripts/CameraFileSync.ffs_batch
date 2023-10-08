@@ -31,8 +31,8 @@
   </Filter>
   <FolderPairs>
     <Pair>
-      <Left>C:\Users\Nicolas\Downloads\CameraFiles</Left>
-      <Right>C:\Users\Nicolas\Downloads\Project\IMG</Right>
+      <Left>mtp:\D40X\Removable storage\DCIM\100IIII6</Left>
+      <Right>C:\Users\Nicolas\Downloads\Project\CanonIxius\IMG</Right>
     </Pair>
   </FolderPairs>
   <Errors Ignore="true" Retry="0" Delay="5" />

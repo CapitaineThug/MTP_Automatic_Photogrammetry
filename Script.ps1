@@ -12,14 +12,23 @@ function GenerateForm {
         #Variables
         $ConfigSync = ".\FileSync Scripts\CameraFileSync.ffs_batch"
         $CameraPath = $TB_ImagesPath.Text
-        $ProjectImagesPath = $TB_ProjectPath.Text + "\IMG"
+        $AllProjectRoot = $TB_ProjectPath.Text
+        $ProjectName = $TB_ProjectName.Text
+        $ProjectPath = $TB_ProjectPath.Text + "\" + $ProjectName
+        $ProjectImagesPath = $ProjectPath + "\IMG"
 
-        #Création des répertoires s'il n'existe pas déjà
+        #Création des répertoires s'ils n'existent pas déjà
+        if (test-Path -Path $ProjectPath) {
+            
+        }
+        else {
+            New-Item -Path $AllProjectRoot -Name $ProjectName -ItemType "directory" #Project Directory
+        }
         if (test-Path -Path $ProjectImagesPath) {
             
         }
         else {
-            New-Item -Path $TB_ProjectPath.Text -Name "IMG" -ItemType "directory"
+            New-Item -Path $ProjectPath -Name "IMG" -ItemType "directory" #Images Directory
         }
 
 
@@ -33,6 +42,7 @@ function GenerateForm {
 
         #Synchronisation des fichiers avec le répertoire actuel
         $OldFiles = Get-ChildItem -Path $ProjectImagesPath
+        StatusOn
         Start-Process -FilePath '"FileSync Scripts\CameraFileSync.ffs_batch"'
 
         #Délai demandé
@@ -42,13 +52,12 @@ function GenerateForm {
         #Vérification s'il y a eu des changements
         if ($OldFiles.count -eq (Get-ChildItem -Path $ProjectImagesPath).count) {
             #Aucune modif, lancer le process
-            Write-Host "Lancement du calcul !!!!!!"
+            StatusOff
             LaunchProcess
 
         }
         else {
             #Modif détectée, continuer à sync
-            write-host "On resync ???"
             SyncFiles
 
         }
@@ -57,7 +66,29 @@ function GenerateForm {
 
     #Fonction pour lancer le calcul dans metashape
     function LaunchProcess {
-        
+
+        #Lancement du script python pour Metashape
+        Start-Process -FilePath "Metashape.exe" -ArgumentList "-r", '"Metashape Scripts\CreateProjectFiles.py"', $ProjectImagesPath, $ProjectPath, $TB_ProjectName.text -Wait
+
+        #Ouverture du projet
+        $FullProjectPath = $ProjectPath + "\" + $TB_ProjectName.text + ".psx"
+        write-host $FullProjectPath
+        Start-Process -FilePath $FullProjectPath
+
+    }
+
+    function StatusOff {
+
+        $label9.BackColor = "Tomato"
+        $label9.Text = "Idle"
+
+    }
+
+    function StatusOn {
+
+        $label9.BackColor = "Green"
+        $label9.Text = "Syncing"
+
     }
     
     #region Import the Assemblies
@@ -129,7 +160,7 @@ function GenerateForm {
         
     $button2_OnClick = 
     {
-        #TODO: Place custom script here
+        LaunchProcess
         
     }
         
@@ -489,7 +520,7 @@ function GenerateForm {
     $System_Drawing_Size.Width = 676
     $TB_ImagesPath.Size = $System_Drawing_Size
     $TB_ImagesPath.TabIndex = 1
-    $TB_ImagesPath.Text = "C:\"
+    $TB_ImagesPath.Text = "mtp:\"
     $TB_ImagesPath.add_TextChanged($handler_TB_ImagesPath_TextChanged)
         
     $GB_Files.Controls.Add($TB_ImagesPath)
